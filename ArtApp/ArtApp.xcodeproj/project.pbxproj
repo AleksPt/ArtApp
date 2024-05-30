@@ -58,14 +58,12 @@
 		FA8C4BBB2C087F8E00B5B90E /* ArtApp */ = {
 			isa = PBXGroup;
 			children = (
-				FA8C4BBC2C087F8E00B5B90E /* AppDelegate.swift */,
-				FA8C4BBE2C087F8E00B5B90E /* SceneDelegate.swift */,
-				FA8C4BC02C087F8E00B5B90E /* ViewController.swift */,
+				FA8C4BD62C0884A300B5B90E /* App */,
+				FA8C4BD72C0884B800B5B90E /* ViewControllers */,
 				FA8C4BD32C08809F00B5B90E /* Services */,
 				FA8C4BD02C08804F00B5B90E /* Model */,
-				FA8C4BC52C087F9000B5B90E /* Assets.xcassets */,
+				FA8C4BD82C0884C300B5B90E /* Resources */,
 				FA8C4BC72C087F9000B5B90E /* LaunchScreen.storyboard */,
-				FA8C4BCA2C087F9000B5B90E /* Info.plist */,
 			);
 			path = ArtApp;
 			sourceTree = "<group>";
@@ -84,6 +82,32 @@
 				FA8C4BD42C0880AF00B5B90E /* NetworkService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		FA8C4BD62C0884A300B5B90E /* App */ = {
+			isa = PBXGroup;
+			children = (
+				FA8C4BBC2C087F8E00B5B90E /* AppDelegate.swift */,
+				FA8C4BBE2C087F8E00B5B90E /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		FA8C4BD72C0884B800B5B90E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				FA8C4BC02C087F8E00B5B90E /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FA8C4BD82C0884C300B5B90E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				FA8C4BC52C087F9000B5B90E /* Assets.xcassets */,
+				FA8C4BCA2C087F9000B5B90E /* Info.plist */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,7 +330,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L23B96GPNM;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ArtApp/Info.plist;
+				INFOPLIST_FILE = ArtApp/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -336,7 +360,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = L23B96GPNM;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ArtApp/Info.plist;
+				INFOPLIST_FILE = ArtApp/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;

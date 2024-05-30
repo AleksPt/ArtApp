@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ViewController: UIViewController {
+final class MainViewController: UIViewController {
 
     // MARK: - Private properties
     private var networkService = NetworkService.shared
@@ -20,7 +20,6 @@ final class ViewController: UIViewController {
         setupView()
         setConstraints()
         fetchArtists()
-        
     }
 
     private func fetchArtists() {
@@ -40,9 +39,10 @@ final class ViewController: UIViewController {
 
 }
 
-extension ViewController {
+extension MainViewController {
     func setupView() {
-        view.backgroundColor = .white
+        view.backgroundColor = .systemGroupedBackground
+        title = "All artists"
         setupTableView()
     }
     
@@ -56,7 +56,7 @@ extension ViewController {
 
     func setConstraints() {
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
@@ -65,7 +65,7 @@ extension ViewController {
 }
 
 // MARK: - Table View Data Source
-extension ViewController: UITableViewDataSource {
+extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         artists.count
     }
@@ -87,6 +87,6 @@ extension ViewController: UITableViewDataSource {
 }
 
 // MARK: - Table View Delegate
-extension ViewController: UITableViewDelegate {
+extension MainViewController: UITableViewDelegate {
     
 }

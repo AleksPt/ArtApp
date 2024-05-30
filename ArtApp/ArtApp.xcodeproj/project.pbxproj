@@ -15,6 +15,7 @@
 		FA8C4BD22C08805B00B5B90E /* ArtistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8C4BD12C08805B00B5B90E /* ArtistItem.swift */; };
 		FA8C4BD52C0880AF00B5B90E /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8C4BD42C0880AF00B5B90E /* NetworkService.swift */; };
 		FA8C4BDA2C089EF500B5B90E /* ArtistDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8C4BD92C089EF500B5B90E /* ArtistDetailViewController.swift */; };
+		FA8C4BDE2C08A67500B5B90E /* WorkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8C4BDD2C08A67500B5B90E /* WorkCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		FA8C4BD12C08805B00B5B90E /* ArtistItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistItem.swift; sourceTree = "<group>"; };
 		FA8C4BD42C0880AF00B5B90E /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		FA8C4BD92C089EF500B5B90E /* ArtistDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistDetailViewController.swift; sourceTree = "<group>"; };
+		FA8C4BDD2C08A67500B5B90E /* WorkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			children = (
 				FA8C4BD62C0884A300B5B90E /* App */,
 				FA8C4BD72C0884B800B5B90E /* ViewControllers */,
+				FA8C4BDC2C08A63E00B5B90E /* Cells */,
 				FA8C4BD32C08809F00B5B90E /* Services */,
 				FA8C4BD02C08804F00B5B90E /* Model */,
 				FA8C4BD82C0884C300B5B90E /* Resources */,
@@ -111,6 +114,14 @@
 				FA8C4BCA2C087F9000B5B90E /* Info.plist */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		FA8C4BDC2C08A63E00B5B90E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				FA8C4BDD2C08A67500B5B90E /* WorkCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA8C4BD52C0880AF00B5B90E /* NetworkService.swift in Sources */,
+				FA8C4BDE2C08A67500B5B90E /* WorkCell.swift in Sources */,
 				FA8C4BC12C087F8E00B5B90E /* MainViewController.swift in Sources */,
 				FA8C4BD22C08805B00B5B90E /* ArtistItem.swift in Sources */,
 				FA8C4BBD2C087F8E00B5B90E /* AppDelegate.swift in Sources */,

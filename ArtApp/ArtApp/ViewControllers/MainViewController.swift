@@ -8,7 +8,7 @@
 import UIKit
 
 final class MainViewController: UIViewController {
-
+    
     // MARK: - Private properties
     private var networkService = NetworkService.shared
     private var artists = [Artist]()
@@ -50,6 +50,7 @@ extension MainViewController {
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.contentInset = UIEdgeInsets(top: -20, left: 0, bottom: 0, right: 0)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
     }
@@ -88,5 +89,10 @@ extension MainViewController: UITableViewDataSource {
 
 // MARK: - Table View Delegate
 extension MainViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = ArtistDetailViewController()
+        vc.title = artists[indexPath.row].name
+        vc.works = artists[indexPath.item].works
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

@@ -16,6 +16,7 @@
 		FA8C4BD52C0880AF00B5B90E /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8C4BD42C0880AF00B5B90E /* NetworkService.swift */; };
 		FA8C4BDA2C089EF500B5B90E /* ArtistDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8C4BD92C089EF500B5B90E /* ArtistDetailViewController.swift */; };
 		FA8C4BDE2C08A67500B5B90E /* WorkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8C4BDD2C08A67500B5B90E /* WorkCell.swift */; };
+		FA8C4BFA2C08FB3500B5B90E /* WorkDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8C4BF92C08FB3500B5B90E /* WorkDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		FA8C4BD42C0880AF00B5B90E /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		FA8C4BD92C089EF500B5B90E /* ArtistDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistDetailViewController.swift; sourceTree = "<group>"; };
 		FA8C4BDD2C08A67500B5B90E /* WorkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkCell.swift; sourceTree = "<group>"; };
+		FA8C4BF92C08FB3500B5B90E /* WorkDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 			children = (
 				FA8C4BC02C087F8E00B5B90E /* MainViewController.swift */,
 				FA8C4BD92C089EF500B5B90E /* ArtistDetailViewController.swift */,
+				FA8C4BF92C08FB3500B5B90E /* WorkDetailViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				FA8C4BD22C08805B00B5B90E /* ArtistItem.swift in Sources */,
 				FA8C4BBD2C087F8E00B5B90E /* AppDelegate.swift in Sources */,
 				FA8C4BDA2C089EF500B5B90E /* ArtistDetailViewController.swift in Sources */,
+				FA8C4BFA2C08FB3500B5B90E /* WorkDetailViewController.swift in Sources */,
 				FA8C4BBF2C087F8E00B5B90E /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

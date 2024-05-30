@@ -10,7 +10,7 @@ import UIKit
 final class ArtistDetailViewController: UIViewController {
     
     // MARK: - Public properties
-    var works = [Work]()
+    private var works = [Work]()
     
     // MARK: - Private properties
     private lazy var collectionView: UICollectionView = {
@@ -38,11 +38,20 @@ final class ArtistDetailViewController: UIViewController {
         return collectionView
     }()
     
+    #warning("ПЕРЕДЕЛАТЬ В HEADER 👇")
+    private let imageView = UIImageView()
+    
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setConstraints()
+    }
+    
+    func configure(_ item: Artist) {
+        title = item.name
+        works = item.works
+        imageView.image = UIImage(named: item.image)
     }
 }
 
@@ -52,14 +61,27 @@ extension ArtistDetailViewController {
         view.backgroundColor = .systemGroupedBackground
         view.addSubview(collectionView)
         navigationController?.navigationBar.prefersLargeTitles = true
+        setupImageView()
+    }
+    
+    func setupImageView() {
+        view.addSubview(imageView)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 15
     }
     
     func setConstraints() {
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 25),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
+            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
+            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25)
         ])
     }
 }
@@ -87,5 +109,9 @@ extension ArtistDetailViewController: UICollectionViewDataSource {
 
 // MARK: - Collection View Delegate
 extension ArtistDetailViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = WorkDetailViewController()
+        vc.configure(works[indexPath.item])
+        present(vc, animated: true)
+    }
 }

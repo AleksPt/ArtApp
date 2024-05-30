@@ -21,6 +21,12 @@ final class MainViewController: UIViewController {
         setConstraints()
         fetchArtists()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.navigationItem.largeTitleDisplayMode = .never
+    }
 
     private func fetchArtists() {
         networkService.fetchArtists { [weak self] artists in
@@ -91,8 +97,7 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = ArtistDetailViewController()
-        vc.title = artists[indexPath.row].name
-        vc.works = artists[indexPath.item].works
+        vc.configure(artists[indexPath.item])
         navigationController?.pushViewController(vc, animated: true)
     }
 }

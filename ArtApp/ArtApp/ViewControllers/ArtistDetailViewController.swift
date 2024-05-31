@@ -27,7 +27,7 @@ final class ArtistDetailViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = .systemGroupedBackground
-        collectionView.register(WorkCell.self, forCellWithReuseIdentifier: WorkCell.description())
+        collectionView.register(ArtistDetailCell.self, forCellWithReuseIdentifier: ArtistDetailCell.description())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.contentInset = UIEdgeInsets(
             top: 0,
@@ -94,9 +94,9 @@ extension ArtistDetailViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: WorkCell.description(),
+            withReuseIdentifier: ArtistDetailCell.description(),
             for: indexPath
-        ) as? WorkCell else {
+        ) as? ArtistDetailCell else {
             return UICollectionViewCell()
         }
         
@@ -111,7 +111,8 @@ extension ArtistDetailViewController: UICollectionViewDataSource {
 extension ArtistDetailViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let vc = WorkDetailViewController()
-        vc.configure(works[indexPath.item])
+        vc.works = works
+        vc.item = indexPath.item
         present(vc, animated: true)
     }
 }

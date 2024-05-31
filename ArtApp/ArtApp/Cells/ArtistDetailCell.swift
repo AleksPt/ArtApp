@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class WorkCell: UICollectionViewCell {
+final class ArtistDetailCell: UICollectionViewCell {
     
     // MARK: - Private properties
     private let imageView = UIImageView()

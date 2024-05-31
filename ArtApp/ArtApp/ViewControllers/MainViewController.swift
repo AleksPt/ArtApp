@@ -12,7 +12,11 @@ final class MainViewController: UIViewController {
     // MARK: - Private properties
     private var networkService = NetworkService.shared
     private var artists = [Artist]()
+    private var filteredArtist = [Artist]()
     private let tableView = UITableView(frame: .zero, style: .insetGrouped)
+    private let search = UISearchController()
+    private let plugImageView = UIImageView()
+    private let plugLabel = UILabel()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -21,13 +25,8 @@ final class MainViewController: UIViewController {
         setConstraints()
         fetchArtists()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.navigationItem.largeTitleDisplayMode = .never
-    }
 
+    // MARK: - Private methods
     private func fetchArtists() {
         networkService.fetchArtists { [weak self] artists in
             guard let artists else {
@@ -36,31 +35,76 @@ final class MainViewController: UIViewController {
             }
             
             self?.artists = artists.artists
+            self?.filteredArtist = artists.artists
             
             DispatchQueue.main.async {
                 self?.tableView.reloadData()
             }
         }
     }
+    
+    private func isHiddenPlug() {
+        plugImageView.isHidden = filteredArtist.isEmpty ? false : true
+        plugLabel.isHidden = filteredArtist.isEmpty ? false : true
+    }
 
 }
 
+// MARK: - Setup View
 extension MainViewController {
     func setupView() {
         view.backgroundColor = .systemGroupedBackground
+        navigationItem.searchController = search
+        navigationItem.hidesSearchBarWhenScrolling = false
         title = "All artists"
         setupTableView()
+        setupSearch()
+        setupPlug()
     }
     
     func setupTableView() {
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.contentInset = UIEdgeInsets(top: -20, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: -30, left: 0, bottom: 0, right: 0)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(MainCell.self, forCellReuseIdentifier: "cell")
     }
+    
+    func setupSearch() {
+        search.searchBar.placeholder = "I'm looking..."
+        search.searchBar.searchBarStyle = .minimal
+        search.searchResultsUpdater = self
+    }
+    
+    func setupPlug() {
+        view.addSubview(plugImageView)
+        plugImageView.isHidden = true
+        plugImageView.image = .notFound
+        plugImageView.frame = CGRect(
+            x: view.center.x - 25,
+            y: view.center.y - 25,
+            width: 50,
+            height: 50
+        )
+        
+        view.addSubview(plugLabel)
+        plugLabel.text = "I couldn't find anything :("
+        plugLabel.isHidden = true
+        plugLabel.textAlignment = .center
+        plugLabel.font = .systemFont(ofSize: 12)
+        plugLabel.frame = CGRect(
+            x: 0,
+            y: plugImageView.frame.maxY + 10,
+            width: view.frame.width,
+            height: 12
+        )
+    }
 
+}
+
+// MARK: - Set Constraints
+extension MainViewController {
     func setConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -74,7 +118,7 @@ extension MainViewController {
 // MARK: - Table View Data Source
 extension MainViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        artists.count
+        filteredArtist.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -85,7 +129,7 @@ extension MainViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        let artistIndex = artists[indexPath.row]
+        let artistIndex = filteredArtist[indexPath.row]
         cell.configureCell(artist: artistIndex)
         
         cell.separatorInset = .zero
@@ -99,7 +143,7 @@ extension MainViewController: UITableViewDataSource {
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc = ArtistDetailViewController()
-        vc.configure(artists[indexPath.item])
+        vc.configure(filteredArtist[indexPath.item])
         navigationController?.pushViewController(vc, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
@@ -108,4 +152,24 @@ extension MainViewController: UITableViewDelegate {
         100
     }
     
+}
+
+// MARK: - UISearchResultsUpdating {
+extension MainViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let query = searchController.searchBar.text else {
+            return
+        }
+        if query.isEmpty {
+            filteredArtist = artists
+            isHiddenPlug()
+        } else {
+            filteredArtist = artists.filter {
+                $0.name.lowercased().contains(query.lowercased())
+            }
+            isHiddenPlug()
+        }
+        
+        tableView.reloadData()
+    }
 }

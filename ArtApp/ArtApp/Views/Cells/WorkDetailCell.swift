@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WorkDetailCell: UICollectionViewCell {
+final class WorkDetailCell: UICollectionViewCell {
     
     // MARK: - Private properties
     private let nameWorkLabel = UILabel()

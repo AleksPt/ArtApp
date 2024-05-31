@@ -10,6 +10,9 @@ import UIKit
 final class ArtistDetailViewController: UIViewController {
     
     // MARK: - Public properties
+    var artist: Artist?
+    
+    // MARK: - Private properties
     private var works = [Work]()
     
     // MARK: - Private properties
@@ -28,6 +31,7 @@ final class ArtistDetailViewController: UIViewController {
         collectionView.delegate = self
         collectionView.backgroundColor = .systemGroupedBackground
         collectionView.register(ArtistDetailCell.self, forCellWithReuseIdentifier: ArtistDetailCell.description())
+        collectionView.register(HeaderArtistDetail.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderArtistDetail.description())
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.contentInset = UIEdgeInsets(
             top: 0,
@@ -37,9 +41,6 @@ final class ArtistDetailViewController: UIViewController {
         )
         return collectionView
     }()
-    
-    #warning("ПЕРЕДЕЛАТЬ В HEADER 👇")
-    private let imageView = UIImageView()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -51,7 +52,7 @@ final class ArtistDetailViewController: UIViewController {
     func configure(_ item: Artist) {
         title = item.name
         works = item.works
-        imageView.image = UIImage(named: item.image)
+        artist = item
     }
 }
 
@@ -60,28 +61,15 @@ extension ArtistDetailViewController {
     func setupView() {
         view.backgroundColor = .systemGroupedBackground
         view.addSubview(collectionView)
-        navigationController?.navigationBar.prefersLargeTitles = true
-        setupImageView()
-    }
-    
-    func setupImageView() {
-        view.addSubview(imageView)
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = 15
+//        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     func setConstraints() {
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 25),
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor, constant: 25),
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -25),
-            imageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 25)
         ])
     }
 }
@@ -105,6 +93,7 @@ extension ArtistDetailViewController: UICollectionViewDataSource {
         
         return cell
     }
+    
 }
 
 // MARK: - Collection View Delegate
@@ -114,5 +103,24 @@ extension ArtistDetailViewController: UICollectionViewDelegate {
         vc.works = works
         vc.item = indexPath.item
         present(vc, animated: true)
+    }
+}
+
+// MARK: - Collection View Delegate Flow Layout
+extension ArtistDetailViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderArtistDetail.description(), for: indexPath) as? HeaderArtistDetail else {
+            return UICollectionReusableView()
+        }
+        
+        if let artist {
+            header.configureHeader(artist)
+        }
+        
+        return header
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        CGSize(width: collectionView.frame.width, height: UIScreen.main.bounds.width)
     }
 }

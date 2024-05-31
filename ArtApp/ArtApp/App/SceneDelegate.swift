@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = UINavigationController(rootViewController: MainViewController())
-//        window.rootViewController = UINavigationController(rootViewController: ArtistDetailViewController())
+//        window.rootViewController = UINavigationController(rootViewController: CreateNewArtistViewController())
         window.makeKeyAndVisible()
         self.window = window
         

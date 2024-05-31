@@ -47,6 +47,21 @@ final class MainViewController: UIViewController {
         plugImageView.isHidden = filteredArtist.isEmpty ? false : true
         plugLabel.isHidden = filteredArtist.isEmpty ? false : true
     }
+    
+    private func goToCreateNewArtistVC() -> UIAction {
+        let action = UIAction { [weak self] _ in
+            guard let self else { return }
+            let vc = CreateNewArtistViewController()
+            vc.completionSaveNewArtist = { [weak self] newArtist in
+                guard let self else { return }
+                artists.insert(newArtist, at: 0)
+                filteredArtist = artists
+                tableView.reloadData()
+            }
+            present(vc, animated: true)
+        }
+        return action
+    }
 
 }
 
@@ -54,12 +69,20 @@ final class MainViewController: UIViewController {
 extension MainViewController {
     func setupView() {
         view.backgroundColor = .systemGroupedBackground
-        navigationItem.searchController = search
-        navigationItem.hidesSearchBarWhenScrolling = false
         title = "All artists"
+        setupNavigationItems()
         setupTableView()
         setupSearch()
         setupPlug()
+    }
+    
+    func setupNavigationItems() {
+        navigationItem.searchController = search
+        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            systemItem: .add,
+            primaryAction: goToCreateNewArtistVC()
+        )
     }
     
     func setupTableView() {

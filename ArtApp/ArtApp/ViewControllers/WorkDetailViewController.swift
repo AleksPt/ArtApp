@@ -72,7 +72,7 @@ extension WorkDetailViewController {
 extension WorkDetailViewController {
     func setConstraints() {
         NSLayoutConstraint.activate([
-            closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             
             collectionView.topAnchor.constraint(equalTo: closeButton.bottomAnchor),

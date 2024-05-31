@@ -14,12 +14,16 @@ final class WorkDetailViewController: UIViewController {
     var item: Int?
     
     // MARK: - Private properties
+    private let closeButton = UIButton()
+    
+    // MARK: - Private properties
     private lazy var collectionView: UICollectionView = {
         let collection = UICollectionView(frame: view.frame, collectionViewLayout: createSectionLayout())
         collection.register(WorkDetailCell.self, forCellWithReuseIdentifier: WorkDetailCell.description())
         collection.dataSource = self
         collection.backgroundColor = .black
         collection.alpha = 0.99
+        collection.translatesAutoresizingMaskIntoConstraints = false
         return collection
     }()
     
@@ -28,6 +32,7 @@ final class WorkDetailViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         scrollToItem()
+        setConstraints()
     }
     
     // MARK: - Private methods
@@ -38,6 +43,10 @@ final class WorkDetailViewController: UIViewController {
             animated: false
         )
     }
+    
+    @objc private func closeVC() {
+        dismiss(animated: true)
+    }
 }
 
 // MARK: - Setup View
@@ -46,10 +55,35 @@ extension WorkDetailViewController {
         view.addSubview(collectionView)
         view.backgroundColor = .black
         view.alpha = 0.99
+        setupCloseButton()
+    }
+    
+    func setupCloseButton() {
+        view.addSubview(closeButton)
+        closeButton.addTarget(self, action: #selector(closeVC), for: .touchUpInside)
+        closeButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
+        closeButton.tintColor = .white
+    }
+    
+}
+
+// MARK: - Set Constraints
+extension WorkDetailViewController {
+    func setConstraints() {
+        NSLayoutConstraint.activate([
+            closeButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            closeButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
+            
+            collectionView.topAnchor.constraint(equalTo: closeButton.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
     }
 }
 
-// MARK: - Setup Layout
+// MARK: - Setup Collection Layout
 extension WorkDetailViewController {
     
     func createSectionLayout() -> UICollectionViewCompositionalLayout {

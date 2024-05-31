@@ -61,7 +61,6 @@ extension ArtistDetailViewController {
     func setupView() {
         view.backgroundColor = .systemGroupedBackground
         view.addSubview(collectionView)
-//        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     func setConstraints() {

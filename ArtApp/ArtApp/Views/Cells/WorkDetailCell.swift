@@ -78,7 +78,7 @@ extension WorkDetailCell {
 extension WorkDetailCell {
     func setConstraints() {
         NSLayoutConstraint.activate([
-            nameWorkLabel.topAnchor.constraint(equalTo: topAnchor, constant: 25),
+            nameWorkLabel.topAnchor.constraint(equalTo: topAnchor),
             nameWorkLabel.leadingAnchor.constraint(equalTo: workImageView.leadingAnchor),
             nameWorkLabel.trailingAnchor.constraint(equalTo: workImageView.trailingAnchor),
             

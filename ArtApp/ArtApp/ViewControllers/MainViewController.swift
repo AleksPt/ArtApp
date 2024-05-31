@@ -58,7 +58,7 @@ extension MainViewController {
         tableView.delegate = self
         tableView.contentInset = UIEdgeInsets(top: -20, left: 0, bottom: 0, right: 0)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(MainCell.self, forCellReuseIdentifier: "cell")
     }
 
     func setConstraints() {
@@ -78,16 +78,18 @@ extension MainViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: "cell",
+            for: indexPath
+        ) as? MainCell else {
+            return UITableViewCell()
+        }
         
         let artistIndex = artists[indexPath.row]
-        
-        var cellConfiguration = cell.defaultContentConfiguration()
-        cellConfiguration.text = artistIndex.name
-        cellConfiguration.secondaryText = artistIndex.bio
-        cell.contentConfiguration = cellConfiguration
+        cell.configureCell(artist: artistIndex)
         
         cell.separatorInset = .zero
+        cell.accessoryType = .disclosureIndicator
         
         return cell
     }
@@ -99,5 +101,11 @@ extension MainViewController: UITableViewDelegate {
         let vc = ArtistDetailViewController()
         vc.configure(artists[indexPath.item])
         navigationController?.pushViewController(vc, animated: true)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        100
+    }
+    
 }

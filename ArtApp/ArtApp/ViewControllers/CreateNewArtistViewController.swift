@@ -9,7 +9,7 @@ import UIKit
 
 enum Constants {
     static let colorPlaceholder = UIColor(red: 0, green: 0, blue: 0.0980392, alpha: 0.22)
-    static let heightItemCollection: CGFloat = (UIScreen.main.bounds.width - 50) / 3
+    static let height: CGFloat = (UIScreen.main.bounds.width - 50) / 3
     static let bioTextViewPlaceholder = "Enter the artist biography"
 }
 
@@ -19,18 +19,19 @@ final class CreateNewArtistViewController: UIViewController {
     var completionSaveNewArtist: ((Artist)->())?
     
     // MARK: - Private properties
-    private let artistImageView = UIImageView()
+    private let artistPhoto = UIView()
     private let nameArtistTextField = UITextField()
     private let bioTextView = UITextView()
     private let saveButton = UIButton(type: .system)
-    private let imagePicker = UIImagePickerController()
+    private let imagePickerWorksCollection = UIImagePickerController()
+    private let imagePickerArtistPhoto = UIImagePickerController()
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.sectionInsetReference = .fromLayoutMargins
         layout.itemSize = CGSize(
-            width: Constants.heightItemCollection,
-            height: Constants.heightItemCollection
+            width: Constants.height,
+            height: Constants.height
         )
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         return collection
@@ -65,27 +66,80 @@ final class CreateNewArtistViewController: UIViewController {
     @objc private func keyboardIsHidden() {
         view.endEditing(true)
     }
+    
+    @objc private func addArtistPhoto() {
+        present(imagePickerArtistPhoto, animated: true)
+        keyboardIsHidden()
+    }
 }
 
 // MARK: - Setup View
 private extension CreateNewArtistViewController {
     func setupView() {
         view.backgroundColor = .white
-        setupArtistImageView()
+        setupArtistPhoto()
         setupNameArtisTextField()
         setupBioTextView()
         setupSaveButton()
-        setupImagePicker()
+        setupImagePickerWorksCollection()
+        setupImagePickerArtistPhoto()
         setupCollection()
     }
     
-    func setupArtistImageView() {
-        view.addSubview(artistImageView)
-        artistImageView.translatesAutoresizingMaskIntoConstraints = false
-        artistImageView.contentMode = .scaleAspectFill
-        artistImageView.clipsToBounds = true
-        artistImageView.layer.cornerRadius = Constants.heightItemCollection / 2
-        artistImageView.image = ._4
+    func setupArtistPhoto(image: UIImage? = nil) {
+        view.addSubview(artistPhoto)
+        artistPhoto.translatesAutoresizingMaskIntoConstraints = false
+        artistPhoto.contentMode = .scaleAspectFill
+        artistPhoto.clipsToBounds = true
+        artistPhoto.layer.cornerRadius = Constants.height / 2
+        artistPhoto.backgroundColor = .clear
+        artistPhoto.layer.borderWidth = 1
+        artistPhoto.layer.borderColor = UIColor.systemBlue.cgColor
+        
+        let imageView = UIImageView()
+        imageView.image = image
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = (Constants.height - 7) / 2
+        imageView.frame = CGRect(
+            x: 0,
+            y: 0,
+            width: Constants.height - 7,
+            height: Constants.height - 7
+        )
+        
+        let plugView = UIView()
+        plugView.backgroundColor = .customBlue
+        plugView.layer.cornerRadius = Constants.height / 2
+        plugView.frame = CGRect(
+            x: 3.5,
+            y: 3.5,
+            width: Constants.height - 7,
+            height: Constants.height - 7
+        )
+        
+        let text = UILabel()
+        text.text = "Add artist photo"
+        text.frame = CGRect(
+            x: 0,
+            y: plugView.center.y - 7.5,
+            width: plugView.frame.width,
+            height: 15
+        )
+        text.font = .systemFont(ofSize: 12)
+        text.textAlignment = .center
+        text.numberOfLines = 0
+        text.textColor = .systemBlue
+        
+        plugView.addSubview(text)
+        plugView.addSubview(imageView)
+        artistPhoto.addSubview(plugView)
+        
+        let gesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(addArtistPhoto)
+        )
+        artistPhoto.addGestureRecognizer(gesture)
     }
     
     func setupNameArtisTextField() {
@@ -122,10 +176,16 @@ private extension CreateNewArtistViewController {
         saveButton.addTarget(self, action: #selector(saveNewArtist), for: .touchUpInside)
     }
     
-    func setupImagePicker() {
-        imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.allowsEditing = true
+    func setupImagePickerWorksCollection() {
+        imagePickerWorksCollection.delegate = self
+        imagePickerWorksCollection.sourceType = .photoLibrary
+        imagePickerWorksCollection.allowsEditing = true
+    }
+    
+    func setupImagePickerArtistPhoto() {
+        imagePickerArtistPhoto.delegate = self
+        imagePickerArtistPhoto.sourceType = .photoLibrary
+        imagePickerArtistPhoto.allowsEditing = true
     }
     
     func setupCollection() {
@@ -157,16 +217,16 @@ private extension CreateNewArtistViewController {
     
     func setConstraintsArtistImageView() {
         NSLayoutConstraint.activate([
-            artistImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            artistImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            artistImageView.heightAnchor.constraint(equalToConstant: Constants.heightItemCollection),
-            artistImageView.widthAnchor.constraint(equalToConstant: Constants.heightItemCollection)
+            artistPhoto.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            artistPhoto.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            artistPhoto.heightAnchor.constraint(equalToConstant: Constants.height),
+            artistPhoto.widthAnchor.constraint(equalToConstant: Constants.height)
         ])
     }
     
     func setConstraintsTextField() {
         NSLayoutConstraint.activate([
-            nameArtistTextField.topAnchor.constraint(equalTo: artistImageView.bottomAnchor, constant: 20),
+            nameArtistTextField.topAnchor.constraint(equalTo: artistPhoto.bottomAnchor, constant: 20),
             nameArtistTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 25),
             nameArtistTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant:  -25),
             nameArtistTextField.heightAnchor.constraint(equalToConstant: 35),
@@ -197,7 +257,7 @@ private extension CreateNewArtistViewController {
             collectionView.leadingAnchor.constraint(equalTo: bioTextView.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: bioTextView.trailingAnchor),
             collectionView.topAnchor.constraint(equalTo: bioTextView.bottomAnchor, constant: 15),
-            collectionView.heightAnchor.constraint(equalToConstant: Constants.heightItemCollection + 20),
+            collectionView.heightAnchor.constraint(equalToConstant: Constants.height + 20),
             
         ])
     }
@@ -233,17 +293,23 @@ extension CreateNewArtistViewController: UITextViewDelegate {
 extension CreateNewArtistViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        if let image = info[.editedImage] as? UIImage {
-            workImages.append(image)
-            collectionView.reloadData()
-            collectionView.scrollToItem(
-                at: IndexPath(row: workImages.count, section: 0),
-                at: .right,
-                animated: true
-            )
+        if picker == imagePickerWorksCollection {
+            if let image = info[.editedImage] as? UIImage {
+                workImages.append(image)
+                collectionView.reloadData()
+                collectionView.scrollToItem(
+                    at: IndexPath(row: workImages.count, section: 0),
+                    at: .right,
+                    animated: true
+                )
+            }
+            imagePickerWorksCollection.dismiss(animated: true)
+        } else if picker == imagePickerArtistPhoto {
+            if let image = info[.editedImage] as? UIImage {
+                setupArtistPhoto(image: image)
+            }
+            imagePickerArtistPhoto.dismiss(animated: true)
         }
-        
-        imagePicker.dismiss(animated: true)
     }
 }
 
@@ -277,7 +343,7 @@ extension CreateNewArtistViewController: UICollectionViewDataSource {
 extension CreateNewArtistViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.item == workImages.count {
-            present(imagePicker, animated: true)
+            present(imagePickerWorksCollection, animated: true)
         }
         keyboardIsHidden()
     }

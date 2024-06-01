@@ -23,6 +23,8 @@
 		FA8C4C032C0A1FCB00B5B90E /* CreateNewArtistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8C4C022C0A1FCB00B5B90E /* CreateNewArtistViewController.swift */; };
 		FA8C4C062C0A491800B5B90E /* UITextField + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8C4C052C0A491800B5B90E /* UITextField + Extension.swift */; };
 		FA8C4C082C0A5F2E00B5B90E /* String + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8C4C072C0A5F2E00B5B90E /* String + Extension.swift */; };
+		FAD049E02C0B7B1A00CF6ADD /* DidUploadImageForNewArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD049DF2C0B7B1A00CF6ADD /* DidUploadImageForNewArtistCell.swift */; };
+		FAD049E22C0B840900CF6ADD /* WillUploadImageForNewArtistCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD049E12C0B840900CF6ADD /* WillUploadImageForNewArtistCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		FA8C4C022C0A1FCB00B5B90E /* CreateNewArtistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewArtistViewController.swift; sourceTree = "<group>"; };
 		FA8C4C052C0A491800B5B90E /* UITextField + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField + Extension.swift"; sourceTree = "<group>"; };
 		FA8C4C072C0A5F2E00B5B90E /* String + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String + Extension.swift"; sourceTree = "<group>"; };
+		FAD049DF2C0B7B1A00CF6ADD /* DidUploadImageForNewArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DidUploadImageForNewArtistCell.swift; sourceTree = "<group>"; };
+		FAD049E12C0B840900CF6ADD /* WillUploadImageForNewArtistCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WillUploadImageForNewArtistCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,9 +140,10 @@
 		FA8C4BDC2C08A63E00B5B90E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				FA8C4BFD2C09C1D800B5B90E /* MainCell.swift */,
 				FA8C4BDD2C08A67500B5B90E /* ArtistDetailCell.swift */,
 				FA8C4BFB2C09AB8D00B5B90E /* WorkDetailCell.swift */,
-				FA8C4BFD2C09C1D800B5B90E /* MainCell.swift */,
+				FAD049E32C0B97B000CF6ADD /* CreateNewArtistCollection */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -159,6 +164,15 @@
 				FA8C4C072C0A5F2E00B5B90E /* String + Extension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		FAD049E32C0B97B000CF6ADD /* CreateNewArtistCollection */ = {
+			isa = PBXGroup;
+			children = (
+				FAD049DF2C0B7B1A00CF6ADD /* DidUploadImageForNewArtistCell.swift */,
+				FAD049E12C0B840900CF6ADD /* WillUploadImageForNewArtistCell.swift */,
+			);
+			path = CreateNewArtistCollection;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,6 +253,8 @@
 				FA8C4C032C0A1FCB00B5B90E /* CreateNewArtistViewController.swift in Sources */,
 				FA8C4BC12C087F8E00B5B90E /* MainViewController.swift in Sources */,
 				FA8C4BD22C08805B00B5B90E /* ArtistItem.swift in Sources */,
+				FAD049E22C0B840900CF6ADD /* WillUploadImageForNewArtistCell.swift in Sources */,
+				FAD049E02C0B7B1A00CF6ADD /* DidUploadImageForNewArtistCell.swift in Sources */,
 				FA8C4BFE2C09C1D800B5B90E /* MainCell.swift in Sources */,
 				FA8C4BBD2C087F8E00B5B90E /* AppDelegate.swift in Sources */,
 				FA8C4BFC2C09AB8D00B5B90E /* WorkDetailCell.swift in Sources */,

@@ -58,7 +58,7 @@ final class MainViewController: UIViewController {
                 filteredArtist = artists
                 tableView.reloadData()
             }
-            present(vc, animated: true)
+            navigationController?.pushViewController(vc, animated: true)
         }
         return action
     }
@@ -89,7 +89,6 @@ extension MainViewController {
         view.addSubview(tableView)
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.contentInset = UIEdgeInsets(top: -30, left: 0, bottom: 0, right: 0)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.register(MainCell.self, forCellReuseIdentifier: "cell")
     }

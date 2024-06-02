@@ -1,6 +1,6 @@
 # 📱ArtApp
 
-![preview](https://github.com/AleksPt/ArtApp/blob/main/preview.gif)
+![preview](https://github.com/AleksPt/ArtApp/blob/main/appPreview.gif)
 
 Приложение с каталогом картин и их авторов. По умолчанию с сервера подргружается 7 авторов. 
 

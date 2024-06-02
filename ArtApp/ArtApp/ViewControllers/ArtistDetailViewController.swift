@@ -102,6 +102,7 @@ extension ArtistDetailViewController: UICollectionViewDelegate {
         vc.works = works
         vc.item = indexPath.item
         present(vc, animated: true)
+        collectionView.deselectItem(at: indexPath, animated: true)
     }
 }
 

@@ -23,6 +23,18 @@ final class ArtistDetailCell: UICollectionViewCell {
         imageView.image = nil
     }
     
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                layer.cornerRadius = 15
+                layer.borderWidth = 5
+                layer.borderColor = UIColor.systemBlue.cgColor
+            } else {
+                layer.borderWidth = 0
+            }
+        }
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

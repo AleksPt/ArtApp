@@ -1,13 +1,24 @@
 # 📱ArtApp
 
-| ![preview](https://github.com/AleksPt/ArtApp/blob/main/preview1.png) | ![preview](https://github.com/AleksPt/ArtApp/blob/main/preview2.png) | ![preview](https://github.com/AleksPt/ArtApp/blob/main/preview3.png) |![preview](https://github.com/AleksPt/ArtApp/blob/main/preview4.png) |
-|-------|----------|---------|---------|
+![preview](https://github.com/AleksPt/ArtApp/blob/main/demo.gif)
 
+### 📱 О приложении:
 Приложение с каталогом картин и их авторов. По умолчанию с сервера подргружается 7 авторов. 
 
-Также есть поиск по авторам, можно добавить собственного автора (фото, имя, биография) и загрузить его картины из галереи. 
+### 🕹️ Функционал:
+  - поиск по авторам
+  - возможность добавить собственного автора (фото, имя, биография) и загрузить его картины из галереи телефона
 
-## 🔧 Стек
+### ⚙️ Стек:
++ UIKit
++ URLSession
++ Минимальный таргет iOS 17.0
++ Только портретный режим
 
-+ **UIKit**: UITableView, UICollectionView, UISearchController, UIImagePickerController
-+ **URLSession**: [API](https://cdn.accelonline.io/OUR6G_IgJkCvBg5qurB2Ag/files/YPHn3cnKEk2NutI6fHK04Q.json)
+### 📦 Ресурсы:
++ [**JSON**](https://cdn.accelonline.io/OUR6G_IgJkCvBg5qurB2Ag/files/YPHn3cnKEk2NutI6fHK04Q.json)
+
+### 📸 Скриншоты:
+| ![preview](https://github.com/AleksPt/ArtApp/blob/main/1.png) | ![preview](https://github.com/AleksPt/ArtApp/blob/main/2.png) | ![preview](https://github.com/AleksPt/ArtApp/blob/main/3.png) 
+|-------|----------|---------|
+|![preview](https://github.com/AleksPt/ArtApp/blob/main/4.png) | ![preview](https://github.com/AleksPt/ArtApp/blob/main/5.png) | ![preview](https://github.com/AleksPt/ArtApp/blob/main/6.png)

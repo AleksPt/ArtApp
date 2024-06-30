@@ -17,6 +17,7 @@
 
 ### 📦 Ресурсы:
 + [**JSON**](https://cdn.accelonline.io/OUR6G_IgJkCvBg5qurB2Ag/files/YPHn3cnKEk2NutI6fHK04Q.json)
++ [**Assets**](https://cdn.accelonline.io/OUR6G_IgJkCvBg5qurB2Ag/files/5FQFT6cSSEKMdurmRJlSrA.zip)
 
 ### 📸 Скриншоты:
 | ![preview](https://github.com/AleksPt/ArtApp/blob/main/1.png) | ![preview](https://github.com/AleksPt/ArtApp/blob/main/2.png) | ![preview](https://github.com/AleksPt/ArtApp/blob/main/3.png) 

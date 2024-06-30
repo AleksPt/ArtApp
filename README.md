@@ -1,5 +1,6 @@
-# 📱ArtApp
+# ArtApp
 
+### 📺 Демо:
 ![preview](https://github.com/AleksPt/ArtApp/blob/main/demo.gif)
 
 ### 📱 О приложении:
